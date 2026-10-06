@@ -1,39 +1,57 @@
-DSA Lab
+# DSA Lab 🐍
 
-A collection of implementations and lab exercises covering fundamental Data Structures and Algorithms (DSA) concepts.
+ A collection of **Data Structures and Algorithms (DSA)** implementations and lab exercises written in **Python**.
 
-📚 Contents
+ ## 📚 Topics Covered
 
-This repository contains programs and implementations related to:
+- Arrays
+- Linked Lists
+- Stacks
+- Queues
+- Searching Algorithms
+- Sorting Algorithms
+- Trees
+- Graphs
+- Other fundamental DSA concepts
 
-Arrays
+ ## 🛠️ Tech Stack
 
-Linked Lists
+ - **Language:** Python 3
+- **Domain:** Data Structures & Algorithms
 
-Stacks
+ ## 🎯 Purpose
 
-Queues
+ This repository contains implementations and solutions developed as part of my **DSA Lab** to understand and practice fundamental data structures, algorithms, and problem-solving techniques using Python.
 
-Trees
+ ## 🚀 Getting Started
 
-Graphs
+ Clone the repository:
 
-Searching Algorithms
+```
+git clone https://github.com/parthzraj/DSA-Lab.git
+cd DSA-Lab
+```
 
-Sorting Algorithms
+ Run any Python program using:
 
-Other fundamental DSA concepts
+```
+python filename.py
+```
 
-🛠️ Languages Used
+ ## 📂 Repository Structure
 
-Python 
+```
+DSA-Lab/
+├── *.py
+└── README.md
+```
 
-🎯 Purpose
+ ## 👨‍💻 Author
 
-This repository is maintained as part of my DSA Lab work to practice algorithmic problem-solving and understand the implementation of fundamental data structures and algorithms.
+ **Parth Raj**
 
-👨‍💻 Author
+ GitHub: @parthzraj
 
-Parth Raj
+---
 
-⭐ Feel free to explore the repository and use it for learning and practice.
+ ⭐ If you find this repository useful, consider giving it a star!
