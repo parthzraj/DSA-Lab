@@ -13,7 +13,9 @@ HOW TO USE THIS FILE
 3. NumPy examples run if NumPy is installed:
        python -m pip install numpy
    Then run this file again. If NumPy is not installed, the NumPy section
-   will be skipped without stopping the rest of the notes.
+   will be skipped without stopping the r
+   
+   est of the notes.
 
 4. Read the explanations, then change the values and run the examples again.
    The file is intentionally written as a teaching script, not just a list
