@@ -313,11 +313,14 @@ DEQUEUE LOGIC:
 - queue[rear]:
   Accesses the last element.
 
-- front == -1:
+- front and rear == -1:
   Checks whether the queue is EMPTY.
 
 - (rear + 1) % size == front:
   Checks whether the queue is FULL.
+
+- front == rear:
+  then there is only one elemnet in the queue
 
 10. DISPLAY LOGIC
 -----------------
@@ -468,4 +471,32 @@ if space is available.
 
 ============================================================
 """
+
+class CircularQueue:
+    def __init__(self, size):
+        self.size = size
+        self.items = [None]*size
+        self.front = self.rear = -1
+
+    def enqueue(self, data):
+        if (self.rear + 1)% self.size == self.front:
+            print("your queue is full")
+        elif self.front == -1:
+            self.front = self.rear = 0
+            self.items[self.front] = data
+        else: 
+            self.rear  = (self.rear + 1)%self.size
+            self.items[self.rear] = data
+
+    def deletion(self):
+        if self.front == -1:
+            print("you queue is empty")
+        elif self.front == self.rear:
+            self.front = self.rear = -1
+        else:
+            self.front = (self.front + 1)%self.size
+
+    
+
+cq = CircularQueue(5)
 
