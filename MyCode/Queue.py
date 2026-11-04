@@ -353,3 +353,7 @@ class queue:
         else:
             return self.queue[-1]
 
+
+queue1 = queue()
+
+
