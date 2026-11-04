@@ -1082,3 +1082,67 @@ Save NEXT -> Reverse Link -> Move Forward -> Update HEAD.
 """
 
 
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class SinglyLinkedList:
+    def __init__(self):
+        self.head = None
+
+    def insertionEnd(self, data):
+        newNode = Node(data)
+        if self.head == None:
+            self.head = newNode  
+        elif self.head != None:
+            temp = self.head
+            while temp.next != None:
+                temp = temp.next
+            temp.next = newNode
+
+    def display(self):
+        temp = self.head
+        while temp.next != None:
+            print(temp.data, end = "->")
+            temp = temp.next
+        print(temp.data)
+
+    def insertionBegining(self, data):
+        newNode = Node(data)
+        newNode.next = self.head
+        self.head = newNode
+
+    def insertionMiddle(self, data, k):
+        newNode = Node(data)
+        temp = self.head
+        for i in range(k-1):
+            if temp.next != None:
+                temp = temp.next
+        newNode.next = temp.next
+        temp.next = newNode  
+
+    def deletion(self, x):
+        temp = self.head
+        prev = self.head
+        while temp.data != x:
+            prev = temp
+            temp = temp.next
+        prev.next = temp.next
+
+
+
+
+sll = SinglyLinkedList()
+sll.insertionBegining(20)
+sll.insertionBegining(40)
+sll.insertionBegining(30)
+sll.display()
+sll.insertionMiddle(25, 1)
+sll.display()
+sll.deletion(40)
+sll.display()
+
+        
+        
+        
