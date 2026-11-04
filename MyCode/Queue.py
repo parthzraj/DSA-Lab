@@ -324,3 +324,32 @@ FIFO      -> First element inserted comes out first.
 
 ============================================================
 """
+
+class queue:
+    def __init__(self):
+        self.queue = []
+
+    def length(self):
+        return len(self.queue)
+
+    def push(self, data):
+        self.queue.append(data)
+
+    def isEmpty(self):
+        return len(self.queue) == 0
+
+    def pop(self):
+        if self.isEmpty():
+            print("your queue is empty")
+        else:
+            self.queue.pop(0)
+
+    def display(self):
+        print(self.queue)
+
+    def peek(self):
+        if self.isEmpty():
+            print("your queue is empty")
+        else:
+            return self.queue[-1]
+
