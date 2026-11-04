@@ -242,3 +242,34 @@ class stack:
     def length(self):
         return len(self.st)
 
+    def push(self, data):
+        self.st.append(data)
+    
+    def pop(self):
+        if self.isEmpty():
+            print("Your stack is empty")
+            return None
+        return self.st.pop()
+
+    def display(self):
+        print("Your Stack", self.st)
+
+    def isEmpty(self):
+        return len(self.st) == 0
+
+    def peek(self):
+        if self.isEmpty():
+            print("Your stack is empty")
+            return None
+        return self.st[-1]
+
+
+stack1 = stack()
+stack1.push(5)
+stack1.push(2)
+stack1.push(3)
+
+stack1.display()
+print("Top element:", stack1.peek())
+
+    
