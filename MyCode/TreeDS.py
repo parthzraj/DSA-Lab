@@ -1096,3 +1096,857 @@ Stores data and child references.
 ============================================================
 """
 
+"""
+============================================================
+                  BINARY SEARCH TREE (BST)
+============================================================
+
+1. WHAT IS A BINARY SEARCH TREE?
+--------------------------------
+A Binary Search Tree (BST) is a special type of BINARY TREE
+that stores elements in a specific SORTED ORDER.
+
+Every node follows three important rules:
+
+1. All values in the LEFT SUBTREE are smaller than the
+   current node's value.
+
+2. All values in the RIGHT SUBTREE are greater than the
+   current node's value.
+
+3. Both left and right subtrees must also follow the
+   same BST property.
+
+MAIN IDEA:
+LEFT < ROOT < RIGHT
+
+EXAMPLE:
+
+                  50
+                /    \\
+              30      70
+             / \\     / \\
+            20  40   60  80
+
+Here:
+- Values smaller than 50 are on the LEFT.
+- Values greater than 50 are on the RIGHT.
+- The same rule applies to every node.
+
+IMPORTANT:
+A BST is NOT necessarily a balanced tree.
+Its shape depends on the order in which elements are inserted.
+
+2. WHY DO WE NEED A BINARY SEARCH TREE?
+---------------------------------------
+In a normal ARRAY or LIST:
+- Searching may require checking elements one by one.
+- Searching in an unsorted list takes O(n) time.
+
+In a BST:
+- Smaller values are placed on the LEFT.
+- Greater values are placed on the RIGHT.
+- Each comparison helps decide which subtree to explore.
+- Unnecessary parts of the tree can be skipped.
+
+This makes searching efficient when the BST is balanced.
+
+APPLICATION:
+Finding a particular number in a large collection of data.
+
+3. BASIC TERMINOLOGIES
+----------------------
+
+A. ROOT NODE
+------------
+The topmost node of the BST.
+
+Example:
+        50
+       /  \\
+      30   70
+
+50 is the ROOT.
+
+B. PARENT NODE
+--------------
+A node that has one or more children.
+
+Example:
+        50
+       /
+      30
+
+50 is the parent of 30.
+
+C. CHILD NODE
+-------------
+A node directly connected below another node.
+
+D. LEFT CHILD
+-------------
+The child containing a smaller value than its parent.
+
+E. RIGHT CHILD
+--------------
+The child containing a greater value than its parent.
+
+F. LEAF NODE
+------------
+A node having no children.
+
+Example:
+
+                  50
+                /    \\
+              30      70
+             / \\     / \\
+            20  40   60  80
+
+Leaf nodes = 20, 40, 60, 80.
+
+G. SUBTREE
+----------
+A node along with all its descendants forms a subtree.
+
+4. HOW DOES A BST WORK?
+-----------------------
+
+A BST mainly performs three operations:
+
+1. INSERTION
+2. SEARCHING
+3. DELETION
+
+All three operations use the BST ordering property.
+
+------------------------------------------------------------
+5. INSERTION IN BST
+------------------------------------------------------------
+
+Insertion means adding a new node at its correct position
+while maintaining the BST property.
+
+STEPS:
+
+1. If the tree is EMPTY, create a new node and make it ROOT.
+2. Compare the new value with the current node.
+3. If the new value is SMALLER, move LEFT.
+4. If the new value is GREATER, move RIGHT.
+5. Repeat until an empty position (None) is found.
+6. Insert the new node at that position.
+
+EXAMPLE:
+
+Insert the following values:
+
+50, 30, 70, 20, 40, 60, 80
+
+STEP 1: Insert 50
+
+        50
+
+50 becomes ROOT because the tree is empty.
+
+STEP 2: Insert 30
+
+        50
+       /
+      30
+
+30 < 50, so move LEFT.
+
+STEP 3: Insert 70
+
+        50
+       /  \\
+      30   70
+
+70 > 50, so move RIGHT.
+
+STEP 4: Insert 20
+
+        50
+       /
+      30
+     /
+    20
+
+20 < 50 -> LEFT.
+20 < 30 -> LEFT.
+
+STEP 5: Insert 40
+
+        50
+       /
+      30
+     /  \\
+    20   40
+
+40 < 50 -> LEFT.
+40 > 30 -> RIGHT.
+
+FINAL BST:
+
+                  50
+                /    \\
+              30      70
+             / \\     / \\
+            20  40   60  80
+
+IMPORTANT:
+Insertion always takes place at an EMPTY (None) position.
+
+------------------------------------------------------------
+6. SEARCHING IN BST
+------------------------------------------------------------
+
+Searching means finding whether a particular value exists
+in the BST.
+
+STEPS:
+
+1. Start from the ROOT.
+2. Compare the required value with the current node.
+3. If both are EQUAL, the element is FOUND.
+4. If the required value is SMALLER, move LEFT.
+5. If the required value is GREATER, move RIGHT.
+6. If you reach None, the element is NOT FOUND.
+
+EXAMPLE:
+
+Search for 60.
+
+                  50
+                /    \\
+              30      70
+             / \\     / \\
+            20  40   60  80
+
+STEP 1:
+Compare 60 with 50.
+
+60 > 50 -> Move RIGHT.
+
+STEP 2:
+Compare 60 with 70.
+
+60 < 70 -> Move LEFT.
+
+STEP 3:
+Compare 60 with 60.
+
+60 == 60 -> FOUND!
+
+SEARCH PATH:
+
+50 -> 70 -> 60
+
+EXAMPLE 2:
+
+Search for 90.
+
+50 -> RIGHT -> 70 -> RIGHT -> 80 -> RIGHT -> None
+
+90 is NOT FOUND.
+
+IMPORTANT:
+Searching does not modify the BST.
+
+------------------------------------------------------------
+7. DELETION IN BST
+------------------------------------------------------------
+
+Deletion means removing a node while maintaining the
+BST property.
+
+Deletion is more complicated than insertion because
+a node can have different numbers of children.
+
+There are THREE CASES:
+
+CASE 1: DELETION OF A LEAF NODE
+--------------------------------
+
+A leaf node has NO CHILDREN.
+
+Example:
+
+        50
+       /  \\
+      30   70
+     /
+    20
+
+Delete 20.
+
+Since 20 has no children, simply remove it.
+
+RESULT:
+
+        50
+       /  \\
+      30   70
+
+LOGIC:
+- Find the node.
+- Check whether it has children.
+- If it has no children, remove it.
+- Set its parent's corresponding child reference to None.
+
+CASE 2: DELETION OF A NODE WITH ONE CHILD
+-----------------------------------------
+
+A node has exactly ONE child.
+
+Example:
+
+        50
+       /  \\
+      30   70
+        \\
+         40
+
+Delete 30.
+
+Since 30 has only ONE child (40), connect its parent
+directly to its child.
+
+RESULT:
+
+        50
+       /  \\
+      40   70
+
+LOGIC:
+- Find the node.
+- Identify its only child.
+- Replace the node with that child.
+- Maintain the BST property.
+
+CASE 3: DELETION OF A NODE WITH TWO CHILDREN
+---------------------------------------------
+
+A node has BOTH left and right children.
+
+Example:
+
+                  50
+                /    \\
+              30      70
+             / \\     / \\
+            20  40   60  80
+
+Delete 50.
+
+We cannot simply remove 50 because it has TWO children.
+
+SOLUTION:
+Replace the node with either:
+
+1. INORDER SUCCESSOR, OR
+2. INORDER PREDECESSOR.
+
+A. INORDER SUCCESSOR
+--------------------
+The smallest value in the RIGHT SUBTREE.
+
+HOW TO FIND IT?
+- Move to the right child.
+- Keep moving LEFT until no more left child exists.
+
+For deleting 50:
+
+Right subtree:
+
+        70
+       /  \\
+      60   80
+
+The smallest value is 60.
+
+Therefore:
+- Replace 50 with 60.
+- Delete the original 60 node from the right subtree.
+
+RESULT:
+
+                  60
+                /    \\
+              30      70
+             / \\       \\
+            20  40      80
+
+B. INORDER PREDECESSOR
+----------------------
+The largest value in the LEFT SUBTREE.
+
+HOW TO FIND IT?
+- Move to the left child.
+- Keep moving RIGHT until no more right child exists.
+
+For deleting 50:
+
+Left subtree:
+
+        30
+       /  \\
+      20   40
+
+The largest value is 40.
+
+Therefore:
+- Replace 50 with 40.
+- Delete the original 40 node from the left subtree.
+
+IMPORTANT:
+Both methods maintain the BST property.
+
+------------------------------------------------------------
+8. TREE TRAVERSAL IN BST
+------------------------------------------------------------
+
+Traversal means VISITING every node of a tree in a
+specific order.
+
+There are FOUR IMPORTANT TYPES:
+
+1. INORDER
+2. PREORDER
+3. POSTORDER
+4. LEVEL ORDER
+
+A. INORDER TRAVERSAL (LEFT -> ROOT -> RIGHT)
+--------------------------------------------
+
+STEPS:
+1. Traverse the LEFT subtree.
+2. Visit the ROOT node.
+3. Traverse the RIGHT subtree.
+
+Example:
+
+                  50
+                /    \\
+              30      70
+             / \\     / \\
+            20  40   60  80
+
+INORDER OUTPUT:
+
+20 30 40 50 60 70 80
+
+IMPORTANT:
+In a BST, INORDER traversal gives values in
+ASCENDING SORTED ORDER.
+
+B. PREORDER TRAVERSAL (ROOT -> LEFT -> RIGHT)
+---------------------------------------------
+
+STEPS:
+1. Visit the ROOT.
+2. Traverse the LEFT subtree.
+3. Traverse the RIGHT subtree.
+
+OUTPUT:
+
+50 30 20 40 70 60 80
+
+APPLICATION:
+- Copying a tree.
+- Creating a prefix expression.
+- Saving tree structure.
+
+C. POSTORDER TRAVERSAL (LEFT -> RIGHT -> ROOT)
+----------------------------------------------
+
+STEPS:
+1. Traverse the LEFT subtree.
+2. Traverse the RIGHT subtree.
+3. Visit the ROOT.
+
+OUTPUT:
+
+20 40 30 60 80 70 50
+
+APPLICATION:
+- Deleting a complete tree.
+- Evaluating expression trees.
+- Processing child nodes before parent nodes.
+
+D. LEVEL ORDER TRAVERSAL
+------------------------
+Visits nodes level by level, starting from the ROOT.
+
+It uses a QUEUE data structure.
+
+OUTPUT:
+
+50 30 70 20 40 60 80
+
+STEPS:
+1. Insert the root into a queue.
+2. Remove the front element and visit it.
+3. Insert its left child if it exists.
+4. Insert its right child if it exists.
+5. Repeat until the queue is empty.
+
+IMPORTANT:
+Level order traversal is also called BREADTH FIRST
+TRAVERSAL (BFS).
+
+------------------------------------------------------------
+9. REPRESENTATION OF BST IN PYTHON
+------------------------------------------------------------
+
+A BST is commonly implemented using LINKED REPRESENTATION.
+
+Every node contains THREE PARTS:
+
+1. DATA  -> Stores the value.
+2. LEFT  -> Reference to the left child.
+3. RIGHT -> Reference to the right child.
+
+STRUCTURE:
+
+        +------+------+-------+
+        | LEFT | DATA | RIGHT |
+        +------+------+-------+
+
+PYTHON NODE CLASS:
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+CREATING A TREE:
+
+root = Node(50)
+
+root.left = Node(30)
+root.right = Node(70)
+
+root.left.left = Node(20)
+root.left.right = Node(40)
+
+root.right.left = Node(60)
+root.right.right = Node(80)
+
+IMPORTANT:
+- root is the starting node.
+- left stores the reference to the left child.
+- right stores the reference to the right child.
+- None indicates that the child does not exist.
+
+------------------------------------------------------------
+10. IMPORTANT PYTHON LOGIC
+------------------------------------------------------------
+
+A. INSERTION CONDITION
+----------------------
+
+if value < root.data:
+    root.left = insert(root.left, value)
+
+elif value > root.data:
+    root.right = insert(root.right, value)
+
+else:
+    return root
+
+Here:
+- Smaller value -> LEFT.
+- Greater value -> RIGHT.
+- Equal value -> Duplicate ignored in this implementation.
+
+B. SEARCH CONDITION
+-------------------
+
+if root is None:
+    return False
+
+if value == root.data:
+    return True
+
+elif value < root.data:
+    return search(root.left, value)
+
+else:
+    return search(root.right, value)
+
+C. FIND MINIMUM VALUE
+---------------------
+
+while root.left is not None:
+    root = root.left
+
+return root
+
+The smallest element is the LEFTMOST node.
+
+D. FIND MAXIMUM VALUE
+---------------------
+
+while root.right is not None:
+    root = root.right
+
+return root
+
+The largest element is the RIGHTMOST node.
+
+------------------------------------------------------------
+11. TIME AND SPACE COMPLEXITY
+------------------------------------------------------------
+
+Let:
+n = Number of nodes.
+h = Height of the BST.
+
+The time complexity of basic BST operations depends
+on the HEIGHT of the tree.
+
+SEARCH:
+- Best / Balanced Case: O(log n)
+- Worst Case: O(n)
+
+INSERTION:
+- Best / Balanced Case: O(log n)
+- Worst Case: O(n)
+
+DELETION:
+- Best / Balanced Case: O(log n)
+- Worst Case: O(n)
+
+MINIMUM / MAXIMUM:
+- O(h)
+
+INORDER TRAVERSAL:
+- O(n)
+
+PREORDER TRAVERSAL:
+- O(n)
+
+POSTORDER TRAVERSAL:
+- O(n)
+
+LEVEL ORDER TRAVERSAL:
+- O(n)
+
+SPACE COMPLEXITY:
+- Tree storage: O(n)
+- Recursive operations: O(h) auxiliary stack space.
+- Recursive operations in a skewed tree can require O(n)
+  stack space.
+
+WHY DOES THE WORST CASE BECOME O(n)?
+------------------------------------
+
+Consider inserting:
+
+10, 20, 30, 40, 50
+
+The resulting BST:
+
+10
+  \\
+   20
+     \\
+      30
+        \\
+         40
+           \\
+            50
+
+This tree becomes SKEWED.
+
+Searching for 50 requires checking every node.
+
+Therefore:
+Worst-case complexity = O(n).
+
+IMPORTANT:
+A normal BST does not automatically balance itself.
+
+------------------------------------------------------------
+12. BALANCED BST
+------------------------------------------------------------
+
+A Balanced BST keeps its height relatively small.
+
+This improves searching, insertion and deletion.
+
+Examples:
+
+A. AVL TREE
+-----------
+- A self-balancing Binary Search Tree.
+- Balance factor of every node must be -1, 0 or +1.
+- Uses rotations to restore balance.
+
+B. RED-BLACK TREE
+-----------------
+- A self-balancing Binary Search Tree.
+- Uses node colours and balancing rules.
+- Keeps the height within O(log n).
+
+Balanced BST operations:
+SEARCH:    O(log n)
+INSERT:    O(log n)
+DELETE:    O(log n)
+
+------------------------------------------------------------
+13. IMPORTANT PROPERTIES OF BST
+------------------------------------------------------------
+
+- BST is a NON-LINEAR data structure.
+- Every node can have at most TWO children.
+- Left subtree values are smaller than the node.
+- Right subtree values are greater than the node.
+- Every subtree must follow BST rules.
+- Inorder traversal produces sorted values.
+- Duplicate values require a defined handling convention.
+- BST can be balanced or unbalanced.
+- Searching depends on tree height.
+- Insertion and deletion preserve the BST property.
+
+------------------------------------------------------------
+14. APPLICATIONS OF BST
+------------------------------------------------------------
+
+- Searching and maintaining sorted data.
+- Dictionary implementation.
+- Database indexing concepts.
+- Symbol tables.
+- Maintaining dynamic ordered data.
+- Finding minimum and maximum values.
+- Finding predecessor and successor.
+- Range searching.
+- Implementing ordered sets and maps.
+
+------------------------------------------------------------
+15. DIFFERENCE BETWEEN BINARY TREE AND BST
+------------------------------------------------------------
+
+BINARY TREE:
+- Each node has at most TWO children.
+- No particular ordering is required.
+- Searching may take O(n).
+
+BINARY SEARCH TREE:
+- Each node has at most TWO children.
+- Follows LEFT < ROOT < RIGHT.
+- Inorder traversal produces sorted values.
+- Searching takes O(log n) when balanced.
+- Worst-case searching takes O(n).
+
+============================================================
+                 IMPORTANT EXAM POINTS
+============================================================
+
+1. BST stands for Binary Search Tree.
+
+2. Every node has at most TWO children.
+
+3. LEFT SUBTREE < ROOT < RIGHT SUBTREE.
+
+4. INORDER traversal of BST gives SORTED ORDER.
+
+5. Smallest element = LEFTMOST node.
+
+6. Largest element = RIGHTMOST node.
+
+7. Inorder successor = Smallest element in RIGHT subtree.
+
+8. Inorder predecessor = Largest element in LEFT subtree.
+
+9. Deletion has THREE cases:
+   - Leaf node.
+   - Node with one child.
+   - Node with two children.
+
+10. A BST can become skewed.
+
+11. Balanced BST searching = O(log n).
+
+12. Worst-case BST searching = O(n).
+
+13. A normal BST does NOT automatically balance itself.
+
+14. Recursive insertion and searching use the LEFT and
+    RIGHT child references.
+
+============================================================
+                    QUICK REVISION
+============================================================
+
+BST:
+Binary tree following a specific ordering property.
+
+ROOT:
+Topmost node.
+
+LEFT SUBTREE:
+Contains smaller values.
+
+RIGHT SUBTREE:
+Contains greater values.
+
+INSERT:
+Find the correct empty position and add the node.
+
+SEARCH:
+Compare and move LEFT or RIGHT.
+
+DELETE:
+Handle 0, 1 or 2 children.
+
+INORDER:
+LEFT -> ROOT -> RIGHT.
+
+PREORDER:
+ROOT -> LEFT -> RIGHT.
+
+POSTORDER:
+LEFT -> RIGHT -> ROOT.
+
+LEVEL ORDER:
+Visit nodes level by level using a queue.
+
+MINIMUM:
+Leftmost node.
+
+MAXIMUM:
+Rightmost node.
+
+SUCCESSOR:
+Smallest value in the right subtree.
+
+PREDECESSOR:
+Largest value in the left subtree.
+
+BALANCED BST:
+Height remains O(log n).
+
+SKEWED BST:
+Height can become O(n).
+
+============================================================
+                    REMEMBER THE LOGIC
+============================================================
+
+                  LEFT < ROOT < RIGHT
+
+SMALLER VALUE  -> GO LEFT.
+GREATER VALUE  -> GO RIGHT.
+EQUAL VALUE    -> ELEMENT FOUND.
+
+INORDER = SORTED OUTPUT.
+
+INSERTION = FIND EMPTY POSITION.
+SEARCHING = FOLLOW LEFT / RIGHT.
+DELETION = HANDLE 0 / 1 / 2 CHILDREN.
+
+============================================================
+"""
