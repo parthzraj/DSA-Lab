@@ -1,4 +1,5 @@
 nums = [5,7,81,25,6,4,3,4]
+n = len(nums)
 """
 ============================================================
                     SELECTION SORT
@@ -92,5 +93,18 @@ Why?
 
 ============================================================
 """
+
+def selectionSort(arr, n):
+    for i in range(0,n):
+        min_ind = i
+        for j in range(i+1,n):
+            if arr[j]<arr[min_ind]:
+                min_ind = j
+        arr[i], arr[min_ind] = arr[min_ind], arr[i]
+
+
+print(nums, " - Unsorted Form")
+selectionSort(nums, n)
+print(nums, " - Sorted Form")
 
 
