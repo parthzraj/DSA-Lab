@@ -26,7 +26,6 @@ dist[source] = 0
 
 # Dijkstra's Algorithm
 for _ in range(n):
-
     # Find unvisited vertex with minimum distance
     min_dist = float('inf')
     u = -1
